@@ -4,11 +4,11 @@ version = "0.1.0"
 edition = "2021"
 authors = ["calvarez <calvarez@bachuetech.biz>"]
 description = "Basic YAML reader operations"
-keywords = ["YAML","YML"]
-categories = ["value-formatting", "development-tools"]
-repository = "https://github.com/bachuetech/"
+keywords = ["YAML","YML","file","read"]
+categories = ["value-formatting", "development-tools", "filesystem","config"]
+repository = "https://github.com/bachuetech/bt_yaml_utils"
 readme = "README.md"
-homepage = "https://github.com/bachuetech/"
+homepage = "https://github.com/bachuetech/bt_yaml_utils"
 license = "GPL-3.0-only"
 
 [dependencies]
