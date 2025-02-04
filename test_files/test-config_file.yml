@@ -1,0 +1,15 @@
+# app_config.yml
+app_name: BACHUETECH AI
+version: v0.1.0
+environment: dev
+
+dev:
+  api_path: /ai/api/
+  end_points:
+    - id: chat
+      path: /chat
+
+tools:
+  - do_math_expressions
+  - do_basic_math
+  - current_weather
