@@ -1,6 +1,6 @@
 [package]
 name = "bt_yaml_utils"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["calvarez <calvarez@bachuetech.biz>"]
 description = "Basic YAML reader operations"

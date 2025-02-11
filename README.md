@@ -14,6 +14,8 @@ let v = convert_yaml_to_vec_string(&y);
 ## Version History
 * 0.1.0
     * Initial Release
+* 0.1.0
+    * Update YAML dependency to 0.10.0
 
 ## License
 GPL-3.0-only
