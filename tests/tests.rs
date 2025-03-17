@@ -16,7 +16,7 @@ fn test_env_variable(){
     build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
 
     let file_loc_var = "file_loc";
-    std::env::set_var(file_loc_var, "test_files/test-config_file.yml");
+    unsafe { std::env::set_var(file_loc_var, "test_files/test-config_file.yml") };
 
     let test_config = get_yaml(file_loc_var, "fake_location/test-config_file.yml") ;
     

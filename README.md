@@ -16,6 +16,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Initial Release
 * 0.1.0
     * Update YAML dependency to 0.10.0
+* 0.1.2
+    * Update dependencies and move to Rust 2024 Edition
 
 ## License
 GPL-3.0-only
