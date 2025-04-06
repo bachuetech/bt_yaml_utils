@@ -2,9 +2,7 @@ use std::io::Error;
 use bt_file_utils::get_file;
 use yaml_rust2::{Yaml, YamlLoader};
 use bt_logger::log_warning;
-
-    //use super::file_utils::get_file;
-    
+   
     pub fn get_yaml(env_variable: &str, or_file_name: &str) -> Result<Yaml, Error>{
         let config_yml_content: String; 
         match get_file(env_variable, or_file_name) {
