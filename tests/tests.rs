@@ -5,7 +5,7 @@
 #[cfg(test)]
 mod test_yaml_utils{
     use bt_logger::{build_logger, LogLevel, LogTarget};
-    use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_u32, get_yaml};
+    use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_u32, get_yaml};
 
     #[test]
     fn test_relative_location(){
@@ -87,5 +87,23 @@ mod test_yaml_utils{
         //let v = convert_yaml_to_vec_string(&y["size"]);
 
         assert_eq!(get_bool(Some(&y["read_all"]),false),true);
-    }        
+    } 
+
+    #[test]
+    fn test_get_negnum_i32(){
+        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
+        let y = test_config.unwrap();
+        //let v = convert_yaml_to_vec_string(&y["size"]);
+        assert_eq!(get_i32(Some(&y["nsize"]),0),-1);
+    }     
+
+    #[test]
+    fn test_get_posnum_i32(){
+        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
+        let y = test_config.unwrap();
+        //let v = convert_yaml_to_vec_string(&y["size"]);
+        assert_eq!(get_i32(Some(&y["size"]),0),4000);
+    }              
 }

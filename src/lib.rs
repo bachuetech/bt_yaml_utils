@@ -48,3 +48,16 @@ use bt_logger::log_warning;
             }
         }
     }
+
+    pub fn get_i32(yaml_val: Option<&Yaml>, default_val: i32) -> i32{
+        let r = yaml_val.map(|i| i.as_i64().unwrap_or(default_val.into())).unwrap_or(default_val.into());
+        if r > i32::MAX as i64 {
+            i32::MAX
+        }else {
+            if r < i32::MIN as i64 {
+                i32::MIN
+            }else{
+                r as i32
+            }
+        }
+    }    

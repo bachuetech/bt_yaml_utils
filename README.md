@@ -26,6 +26,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Update dependencies
 * 0.1.6
     * Update dependencies and add get_bool and get_u32
+* 0.1.6
+    * Add get_i32    
 
 ## License
 GPL-3.0-only
