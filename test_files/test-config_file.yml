@@ -2,6 +2,9 @@
 app_name: BACHUETECH AI
 version: v0.1.0
 environment: dev
+read_all: true
+size: 4000
+nsize: -1
 
 dev:
   api_path: /ai/api/

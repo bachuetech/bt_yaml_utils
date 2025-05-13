@@ -31,3 +31,20 @@ use bt_logger::log_warning;
             Vec::new()  // Return an empty Vec if not a sequence
         }
     }
+
+    pub fn get_bool(yaml_val: Option<&Yaml>, default_val: bool) -> bool {
+        yaml_val.map(|b| b.as_bool().unwrap_or(default_val)).unwrap_or(default_val)
+    }
+
+    pub fn get_u32(yaml_val: Option<&Yaml>, default_val: u32) -> u32{
+        let r = yaml_val.map(|u| u.as_i64().unwrap_or(default_val.into())).unwrap_or(default_val.into());
+        if r < 0 {
+            return 0; 
+        } else{
+            if r > u32::MAX as i64 {
+                u32::MAX
+            }else {
+                r as u32
+            }
+        }
+    }
