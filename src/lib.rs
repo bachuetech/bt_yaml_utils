@@ -132,7 +132,6 @@ use bt_logger::log_warning;
     /// 
     /// # Returns
     /// - `f64`: The extracted floating-point value.
-
     pub fn get_f64(yaml_val: Option<&Yaml>, default_val: f64) -> f64{
         yaml_val.map(|i| i.as_f64().unwrap_or(default_val.into())).unwrap_or(default_val.into())
-    } 
+    }  

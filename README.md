@@ -32,6 +32,8 @@ let v = convert_yaml_to_vec_string(&y);
     * 
 * 0.1.8
     * Update dependencies. Added get_f64
+* 0.1.9
+    * Update dependencies.
 
 ## License
 GPL-3.0-only
