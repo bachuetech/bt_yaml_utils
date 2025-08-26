@@ -34,6 +34,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Update dependencies. Added get_f64
 * 0.1.9
     * Update dependencies.
+* 0.1.10
+    * Added function get_yaml_from_string to load a YAML configuration from str.    
 
 ## License
 GPL-3.0-only

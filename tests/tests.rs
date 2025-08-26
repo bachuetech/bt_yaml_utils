@@ -5,7 +5,33 @@
 #[cfg(test)]
 mod test_yaml_utils{
     use bt_logger::{build_logger, LogLevel, LogTarget};
-    use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_u32, get_yaml};
+    use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_u32, get_yaml, get_yaml_from_string};
+
+    #[test]
+    fn test_load_from_str_success(){
+        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+
+        //let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
+        const YML_CONTENT: &str = include_str!("../test_files/test-config_file.yml");
+        println!("YAML Content: {:?}",&YML_CONTENT);
+        let test_config = get_yaml_from_string(YML_CONTENT);
+        println!("YAML: {:?}",&test_config);
+
+        assert_eq!(test_config.unwrap()["app_name"].as_str().unwrap(),"BACHUETECH AI");
+    }
+
+    #[test]
+    fn test_load_from_str_bad_file(){
+        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+
+        //let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
+        const YML_CONTENT: &str = include_str!("../test_files/bad_content.yml");
+        println!("YAML Content: {:?}",&YML_CONTENT);
+        let test_config = get_yaml_from_string(YML_CONTENT);
+        println!("YAML: {:?}",&test_config);
+
+        assert!(test_config.unwrap()["app_name"].is_badvalue());
+    }    
 
     #[test]
     fn test_relative_location(){

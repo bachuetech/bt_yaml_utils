@@ -1,7 +1,8 @@
-use std::io::Error;
+//use std::io::Error;
+use std::error::Error;
 use bt_file_utils::get_file;
 use yaml_rust2::{Yaml, YamlLoader};
-use bt_logger::log_warning;
+use bt_logger::{get_error, log_warning};
    
     /// Loads a YAML configuration file.
     /// 
@@ -15,15 +16,21 @@ use bt_logger::log_warning;
     /// # Returns
     /// - `Ok(Yaml)`: The parsed YAML data.
     /// - `Err(Error)`: If the file cannot be retrieved.
-    pub fn get_yaml(env_variable: &str, or_file_name: &str) -> Result<Yaml, Error>{
+    pub fn get_yaml(env_variable: &str, or_file_name: &str) -> Result<Yaml,  Box<dyn Error>>{
         let config_yml_content: String; 
         match get_file(env_variable, or_file_name) {
             Ok(content) => config_yml_content = content,
-            Err(e) => return Err(e),
+            Err(e) => return Err(get_error!("get_yaml","Error getting File. Error: {}",e).into()),
         }
 
-        let yml_config = YamlLoader::load_from_str(&config_yml_content).unwrap();
+        let yml_config = YamlLoader::load_from_str(&config_yml_content)?;
         Ok(yml_config[0].clone())
+    }
+
+    /// Loads a YAML configuration from str
+    pub fn get_yaml_from_string(file_content: &str) -> Result<Yaml,  Box<dyn Error>>{
+        let yml_config = YamlLoader::load_from_str(file_content)?;
+        Ok(yml_config[0].clone())        
     }
 
     /// Converts a YAML sequence into a vector of strings.
