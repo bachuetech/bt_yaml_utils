@@ -4,12 +4,22 @@
 //***********/
 #[cfg(test)]
 mod test_yaml_utils{
+    use std::sync::Once;
+
     use bt_logger::{build_logger, LogLevel, LogTarget};
     use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_u32, get_yaml, get_yaml_from_string};
+    use once_cell::sync::Lazy;
+    
+    static INIT: Once = Once::new();
+    fn ini_log() {
+        INIT.call_once(|| {
+            build_logger("BACHUETECH", "UNIT TEST RUST LLAMA", LogLevel::VERBOSE, LogTarget::STD_ERROR, None );     
+        });
+    }
 
     #[test]
     fn test_load_from_str_success(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
 
         //let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         const YML_CONTENT: &str = include_str!("../test_files/test-config_file.yml");
@@ -22,7 +32,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_load_from_str_bad_file(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
 
         //let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         const YML_CONTENT: &str = include_str!("../test_files/bad_content.yml");
@@ -35,7 +45,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_relative_location(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
 
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         
@@ -45,7 +55,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_env_variable(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
 
         let file_loc_var = "file_loc";
         unsafe { std::env::set_var(file_loc_var, "test_files/test-config_file.yml") };
@@ -58,14 +68,14 @@ mod test_yaml_utils{
 
     #[test]
     fn test_negative(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "fake_location/test-config_file.yml") ;
         assert!(test_config.is_err());
     }
 
     #[test]
     fn test_relative_location_vector(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
 
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
@@ -77,7 +87,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_negative_vector(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
         let v = convert_yaml_to_vec_string(&y);
@@ -87,7 +97,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_get_u32(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
         //let v = convert_yaml_to_vec_string(&y["size"]);
@@ -97,7 +107,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_get_u32_neg(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
         //let v = convert_yaml_to_vec_string(&y["size"]);
@@ -107,7 +117,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_get_bool(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
         //let v = convert_yaml_to_vec_string(&y["size"]);
@@ -117,7 +127,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_get_negnum_i32(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
         //let v = convert_yaml_to_vec_string(&y["size"]);
@@ -126,7 +136,7 @@ mod test_yaml_utils{
 
     #[test]
     fn test_get_posnum_i32(){
-        build_logger("BACHUETECH", "BT.YAML.UTILS", LogLevel::VERBOSE, LogTarget::STD_ERROR );
+        ini_log();
         let test_config = get_yaml("fake_variable", "test_files/test-config_file.yml") ;
         let y = test_config.unwrap();
         //let v = convert_yaml_to_vec_string(&y["size"]);
