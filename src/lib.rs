@@ -164,4 +164,27 @@ use bt_logger::{get_error, log_warning};
     /// - `f64`: The extracted floating-point value.
     pub fn get_f64(yaml_val: Option<&Yaml>, default_val: f64) -> f64{
         yaml_val.map(|i| i.as_f64().unwrap_or(default_val.into())).unwrap_or(default_val.into())
-    }  
+    }
+
+    /// Retrieves a floating-point number (f32) from a YAML element.
+    /// 
+    /// If the YAML value does not exist or is invalid, it returns the provided default value.
+    /// 
+    /// # Arguments
+    /// - `yaml_val`: An optional reference to the YAML element.
+    /// - `default_val`: The default f32 value.
+    /// 
+    /// # Returns
+    /// - `f32`: The extracted floating-point value.
+    pub fn get_f32(yaml_val: Option<&Yaml>, default_val: f32) -> f32{
+        let r = yaml_val.map(|i| i.as_f64().unwrap_or(default_val as f64)).unwrap_or(default_val as f64);
+        if r > f32::MAX as f64 {
+            f32::MAX
+        }else {
+            if r < f32::MIN as f64 {
+                f32::MIN
+            }else{
+                r as f32
+            }
+        }
+    }      
