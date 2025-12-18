@@ -40,6 +40,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Update dependencies.       
 * 0.1.12
     * Update dependencies. 
+* 0.1.13
+    * Added function get_usize  
 
 ## License
 GPL-3.0-only

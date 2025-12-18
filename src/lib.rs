@@ -112,7 +112,7 @@ use bt_logger::{get_error, log_warning};
     /// 
     /// # Arguments
     /// - `yaml_val`: An optional reference to the YAML element.
-    /// - `default_val`: The default i32 value.
+    /// - `default_val`: The default i32 value , in case the YML value is not an integer.
     /// 
     /// # Returns
     /// - `i32`: The extracted or adjusted value.
@@ -125,6 +125,29 @@ use bt_logger::{get_error, log_warning};
                 i32::MIN
             }else{
                 r as i32
+            }
+        }
+    }
+
+    /// Retrieves an unsigned integer (usize) from a YAML element.
+    /// 
+    /// If the YAML value exceeds `usize::MAX` or falls below `0`, it adjusts accordingly.
+    /// 
+    /// # Arguments
+    /// - `yaml_val`: An optional reference to the YAML element.
+    /// - `default_val`: The default usize value, in case the YML value is not an integer.
+    /// 
+    /// # Returns
+    /// - `usize`: The extracted or adjusted value.
+    pub fn get_usize(yaml_val: Option<&Yaml>, default_val: usize) -> usize{
+        let r = yaml_val.map(|i| i.as_i64().unwrap_or(default_val as i64)).unwrap_or(default_val as i64);
+        if r > usize::MAX as i64 {
+            usize::MAX
+        }else {
+            if r < 0 as i64 {
+                0
+            }else{
+                r as usize
             }
         }
     }  
