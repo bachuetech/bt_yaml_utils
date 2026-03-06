@@ -44,6 +44,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Added function get_usize
 * 0.1.14
     * Added function get_f32
+* 0.1.15
+    * Update dependencies.    
 
 ## License
 GPL-3.0-only
