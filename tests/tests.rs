@@ -8,7 +8,6 @@ mod test_yaml_utils{
 
     use bt_logger::{build_logger, LogLevel, LogTarget};
     use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_u32, get_yaml, get_yaml_from_string};
-    use once_cell::sync::Lazy;
     
     static INIT: Once = Once::new();
     fn ini_log() {
