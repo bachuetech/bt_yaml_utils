@@ -6,8 +6,8 @@
 mod test_yaml_utils{
     use std::sync::Once;
 
-    use bt_logger::{build_logger, LogLevel, LogTarget};
-    use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_u32, get_yaml, get_yaml_from_string};
+    use bt_logger::{LogLevel, LogTarget, build_logger, log_verbose};
+    use bt_yaml_utils::{convert_yaml_to_vec_string, get_bool, get_i32, get_key_value_pair_string, get_u32, get_yaml, get_yaml_from_string};
     
     static INIT: Once = Once::new();
     fn ini_log() {
@@ -140,5 +140,16 @@ mod test_yaml_utils{
         let y = test_config.unwrap();
         //let v = convert_yaml_to_vec_string(&y["size"]);
         assert_eq!(get_i32(Some(&y["size"]),0),4000);
-    }              
+    }      
+
+    #[test]
+    fn test_get_hashmap_string_success(){
+        ini_log();
+        let test_config = get_yaml("fake_variable", "test_files/key_value_pairs.yml") ;
+        let y = test_config.unwrap()["dev"].clone();
+        let h = get_key_value_pair_string(Some(&y));
+        log_verbose!("test_get_hashmap_string_success","Hashmap: {:?}",h);
+
+        assert_eq!(h.get("key1").unwrap(),"val1");
+    }            
 }

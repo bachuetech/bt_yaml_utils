@@ -47,7 +47,10 @@ let v = convert_yaml_to_vec_string(&y);
 * 0.1.15
     * Update dependencies.
 * 0.1.16
-    * Update dependencies.            
+    * Update dependencies.
+* 0.1.17
+    * Update bt_logger dependency. 
+    * Add a function to return a key-value pair HashMap <String,String> get_key_value_pair_string             
 
 ## License
 GPL-3.0-only

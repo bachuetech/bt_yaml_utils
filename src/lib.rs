@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 //use std::io::Error;
 use std::error::Error;
 use bt_file_utils::get_file;
@@ -187,4 +188,22 @@ use bt_logger::{get_error, log_warning};
                 r as f32
             }
         }
-    }      
+    }
+
+    //
+    pub fn get_key_value_pair_string(yaml_val: Option<&Yaml> ) -> HashMap<String,String> {
+        let mut new_kv_hashmap: HashMap<String, String> = HashMap::new();
+        if let Some(yml) = yaml_val{
+           if let Yaml::Hash(hash_map) = yml {
+                for (key, val) in hash_map{
+                    if let Some(k) = key.as_str(){
+                        if let Some(v) = val.as_str(){
+                            new_kv_hashmap.insert(k.to_owned(), v.to_owned());
+                        }
+                    }
+                } 
+                
+           }
+        }
+        new_kv_hashmap
+    }
