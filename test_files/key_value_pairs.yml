@@ -1,6 +1,7 @@
 dev:
   key1: "val1"
   key2: "val2"
+  keya: ["valA1","valA2","valA3"]
 prd:
   key3: "val3"
   key4: "val4"

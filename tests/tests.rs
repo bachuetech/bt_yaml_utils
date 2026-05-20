@@ -12,7 +12,7 @@ mod test_yaml_utils{
     static INIT: Once = Once::new();
     fn ini_log() {
         INIT.call_once(|| {
-            build_logger("BACHUETECH", "UNIT TEST RUST LLAMA", LogLevel::VERBOSE, LogTarget::STD_ERROR, None );     
+            build_logger("BACHUETECH", "UNIT TEST RUST YAML", LogLevel::VERBOSE, LogTarget::STD_ERROR, None );     
         });
     }
 
@@ -151,5 +151,16 @@ mod test_yaml_utils{
         log_verbose!("test_get_hashmap_string_success","Hashmap: {:?}",h);
 
         assert_eq!(h.get("key1").unwrap(),"val1");
-    }            
+    }   
+
+    #[test]
+    fn test_get_hashmap_string_vec_issue(){
+        ini_log();
+        let test_config = get_yaml("fake_variable", "test_files/key_value_pairs.yml") ;
+        let y = test_config.unwrap()["dev"].clone();
+        let h = convert_yaml_to_vec_string(&y["keya"]);
+        log_verbose!("test_get_hashmap_string_vec_issue","Vector: {:?}",h);
+
+        assert_eq!(h.len(),3);
+    }                
 }

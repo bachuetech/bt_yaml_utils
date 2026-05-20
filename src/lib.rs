@@ -18,11 +18,11 @@ use bt_logger::{get_error, log_warning};
     /// - `Ok(Yaml)`: The parsed YAML data.
     /// - `Err(Error)`: If the file cannot be retrieved.
     pub fn get_yaml(env_variable: &str, or_file_name: &str) -> Result<Yaml,  Box<dyn Error>>{
-        let config_yml_content: String; 
+        let config_yml_content: String =  
         match get_file(env_variable, or_file_name) {
-            Ok(content) => config_yml_content = content,
-            Err(e) => return Err(get_error!("get_yaml","Error getting File. Error: {}",e).into()),
-        }
+            Ok(content) => content,
+            Err(e) => return Err(get_error!("get_yaml","Get File Error: {}",e).into()),
+        };
 
         let yml_config = YamlLoader::load_from_str(&config_yml_content)?;
         Ok(yml_config[0].clone())
@@ -97,7 +97,7 @@ use bt_logger::{get_error, log_warning};
     pub fn get_u32(yaml_val: Option<&Yaml>, default_val: u32) -> u32{
         let r = yaml_val.map(|u| u.as_i64().unwrap_or(default_val.into())).unwrap_or(default_val.into());
         if r < 0 {
-            return 0; 
+            0
         } else{
             if r > u32::MAX as i64 {
                 u32::MAX
@@ -145,7 +145,7 @@ use bt_logger::{get_error, log_warning};
         if r > usize::MAX as i64 {
             usize::MAX
         }else {
-            if r < 0 as i64 {
+            if r < 0_i64 {
                 0
             }else{
                 r as usize
@@ -164,7 +164,7 @@ use bt_logger::{get_error, log_warning};
     /// # Returns
     /// - `f64`: The extracted floating-point value.
     pub fn get_f64(yaml_val: Option<&Yaml>, default_val: f64) -> f64{
-        yaml_val.map(|i| i.as_f64().unwrap_or(default_val.into())).unwrap_or(default_val.into())
+        yaml_val.map(|i| i.as_f64().unwrap_or(default_val)).unwrap_or(default_val)
     }
 
     /// Retrieves a floating-point number (f32) from a YAML element.
@@ -193,17 +193,15 @@ use bt_logger::{get_error, log_warning};
     //
     pub fn get_key_value_pair_string(yaml_val: Option<&Yaml> ) -> HashMap<String,String> {
         let mut new_kv_hashmap: HashMap<String, String> = HashMap::new();
-        if let Some(yml) = yaml_val{
-           if let Yaml::Hash(hash_map) = yml {
+        if let Some(Yaml::Hash(hash_map)) = yaml_val{
+           //if let Yaml::Hash(hash_map) = yml {
                 for (key, val) in hash_map{
-                    if let Some(k) = key.as_str(){
-                        if let Some(v) = val.as_str(){
+                    if let Some(k) = key.as_str() && let Some(v) = val.as_str(){
                             new_kv_hashmap.insert(k.to_owned(), v.to_owned());
-                        }
                     }
                 } 
                 
-           }
+           //}
         }
         new_kv_hashmap
     }
