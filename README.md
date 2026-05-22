@@ -53,7 +53,10 @@ let v = convert_yaml_to_vec_string(&y);
     * Add a function to return a key-value pair HashMap <String,String> get_key_value_pair_string 
 * 0.1.17
     * Update dependencies.
-    * Clean code.                    
+    * Clean code.
+* 0.1.18
+* 0.1.19
+    * Update log dependency and related changes.
 
 ## License
 GPL-3.0-only

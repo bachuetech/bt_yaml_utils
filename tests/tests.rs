@@ -148,7 +148,7 @@ mod test_yaml_utils{
         let test_config = get_yaml("fake_variable", "test_files/key_value_pairs.yml") ;
         let y = test_config.unwrap()["dev"].clone();
         let h = get_key_value_pair_string(Some(&y));
-        log_verbose!("test_get_hashmap_string_success","Hashmap: {:?}",h);
+        log_verbose!("","Hashmap: {:?}",h);
 
         assert_eq!(h.get("key1").unwrap(),"val1");
     }   
@@ -159,7 +159,7 @@ mod test_yaml_utils{
         let test_config = get_yaml("fake_variable", "test_files/key_value_pairs.yml") ;
         let y = test_config.unwrap()["dev"].clone();
         let h = convert_yaml_to_vec_string(&y["keya"]);
-        log_verbose!("test_get_hashmap_string_vec_issue","Vector: {:?}",h);
+        log_verbose!("","Vector: {:?}",h);
 
         assert_eq!(h.len(),3);
     }                

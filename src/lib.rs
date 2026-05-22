@@ -65,7 +65,7 @@ use bt_logger::{get_error, log_warning};
                 }
             }).collect()
         } else {
-            log_warning!("convert_yaml_to_vec_string","YAML is not a sequence (LIST). Returning empty Vector");
+            log_warning!("","YAML is not a sequence (LIST). Returning empty Vector");
             Vec::new()  // Return an empty Vec if not a sequence
         }
     }
