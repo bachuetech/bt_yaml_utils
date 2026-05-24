@@ -59,6 +59,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Update log dependency and related changes.
 * 0.2.0
     * Move Results to use bt_any_error, using AnyErr instead of Box<dyn Error>
+* 0.2.1
+    * Clean Code    
 
 ## License
 GPL-3.0-only

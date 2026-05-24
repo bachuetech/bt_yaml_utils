@@ -1,6 +1,5 @@
 use std::collections::HashMap;
-//use std::io::Error;
-use std::error::Error;
+
 use bt_any_error::any_err::AnyErr;
 use bt_file_utils::get_file;
 use yaml_rust2::{Yaml, YamlLoader};
