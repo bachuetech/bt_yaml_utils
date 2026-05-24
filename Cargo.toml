@@ -1,6 +1,6 @@
 [package]
 name = "bt_yaml_utils"
-version = "0.1.19"
+version = "0.2.0"
 edition = "2024"
 authors = ["calvarez <calvarez@bachuetech.biz>"]
 description = "Basic YAML reader operations. Transform form YAML to data"
@@ -12,6 +12,7 @@ homepage = "https://github.com/bachuetech/bt_yaml_utils"
 license = "GPL-3.0-only"
 
 [dependencies]
+bt_any_error = "0.1.0"
 bt_file_utils = "0.2.2"
 bt_logger = "0.5.0"
 yaml-rust2 = "0.11.0"
