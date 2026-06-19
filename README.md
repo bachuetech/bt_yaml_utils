@@ -63,6 +63,8 @@ let v = convert_yaml_to_vec_string(&y);
     * Clean Code    
 * 0.2.2
     * Update dependency
+* 0.2.3
+    * Update dependency
 
 ## License
 GPL-3.0-only
